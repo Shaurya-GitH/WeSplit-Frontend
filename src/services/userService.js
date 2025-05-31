@@ -22,4 +22,21 @@ const addFriend=async (payload)=>{
         }
         return await axios.post(`${url}/add-friend`, payload, config);
 }
-export default {getFriends,addFriend}
+
+const logOut=async ()=>{
+    const token=localStorage.getItem("token");
+    const config={
+        headers:{
+            Authorization: token
+        }
+    }
+    try{
+        const resp= await axios.get(`${url}/logout`,config);
+        return resp.status;
+    }
+    catch (e){
+        console.log("error");
+    }
+
+}
+export default {getFriends,addFriend,logOut}

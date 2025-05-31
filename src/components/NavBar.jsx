@@ -1,13 +1,20 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {logout} from "../reducers/userReducer.js";
+import userService from "../services/userService.js";
 
 const NavBar=()=>{
     const dispatch=useDispatch();
     const navigate=useNavigate();
-    const handleLogout=()=>{
-        dispatch(logout());
-        navigate("/");
+    const handleLogout=async ()=>{
+        const status= await userService.logOut();
+        if(status===200){
+            dispatch(logout());
+            navigate("/");
+        }
+        else{
+            console.log("error");
+        }
     }
     return (
         <header className={"d-flex justify-content-between sticky-top p-2 bg-dark bg-gradient text-light"}>

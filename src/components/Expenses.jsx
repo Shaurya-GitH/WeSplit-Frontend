@@ -14,7 +14,7 @@ const Expenses=({unsettled})=> {
                 <div>
                     <h5>Added on {unsettled.createdAt}</h5>
                     {unsettled.splitList.map((split) =>
-                        <div>
+                        <div key={split.expenseSplitId}>
                             <h5>{split.user.firstName} paid {split.paid}</h5>
                             <h5>{split.user.firstName} owed {split.owed}</h5>
                         </div>

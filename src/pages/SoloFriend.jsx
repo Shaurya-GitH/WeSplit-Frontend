@@ -5,9 +5,15 @@ import {getBalance} from "../services/balanceService.js";
 import Expenses from "../components/Expenses.jsx";
 import {getPayments} from "../services/paymentService.js";
 import Payments from "../components/Payments.jsx";
+import CreatePaymentModal from "../components/CreatePaymentModal.jsx";
+import {useState} from "react";
+import Toggleable from "../components/Toggleable.jsx";
+import CreateSoloExpenseModal from "../components/CreateSoloExpenseModal.jsx";
 
-const Friend=()=>{
+const SoloFriend=()=>{
     const email=useParams().email;
+    const [showCreatePayment,setShowCreatePayment]=useState(false);
+    const [showCreateExpense,setShowCreateExpense]=useState(false);
     const expenseResult= useQuery({
         queryKey:['unsettledExpenses'],
         queryFn:()=>getUnsettledExpenses(email),
@@ -44,20 +50,36 @@ const Friend=()=>{
             data:pay,
         }))
     ];
-    const sortedList=mergedList.sort((a,b)=>a.id-b.id);
+    const sortedList=mergedList.sort((a,b)=>b.id-a.id);
     return (
         <div>
-            {email} <br/> {balance.oneOweTwo===0?`${balance.user2.firstName} owes ${balance.twoOweOne}`:balance.oneOweTwo}
+            {email} <br/> {balance.oneOweTwo===0?`${balance.user2.firstName} owes ${balance.twoOweOne}`:`${balance.user1.firstName} owes ${balance.oneOweTwo}`}
+            <button onClick={()=>{
+                setShowCreatePayment(true);
+                setShowCreateExpense(false);
+            }}>Settle</button><br/>
+            <button onClick={()=>{
+                setShowCreateExpense(true);
+                setShowCreatePayment(false);
+            }}>Add Expense</button>
             {
                 sortedList.map((entity)=>
-                    <div>
+                    <div key={entity.id}>
                         {entity.type==="expense"?
-                        <Expenses unsettled={entity.data} email={email}/>:
+                        <Expenses unsettled={entity.data}/>:
                         <Payments payment={entity.data}/>}
                     </div>
                 )
             }
+            <div>
+                <Toggleable state={showCreateExpense}>
+                    <CreateSoloExpenseModal setShowCreateExpense={setShowCreateExpense}/>
+                </Toggleable>
+                <Toggleable state={showCreatePayment}>
+                    <CreatePaymentModal balance={balance} setShowCreatePayment={setShowCreatePayment}/>
+                </Toggleable>
+            </div>
         </div>
     )
 }
-export default Friend
+export default SoloFriend

@@ -47,7 +47,7 @@ const AddFriendModal=({setShowAddFriend})=>{
                 first name: <input type="text" name="firstName" value={formData.firstName} onInput={handleInput}/><br/>
                 last name: <input type="text" name="lastName" value={formData.lastName} onInput={handleInput}/><br/>
                 email: <input type="email" name="email" value={formData.email} onInput={handleInput}/> <br/>
-                <input type="button" value="Add Friend" onClick={handleAddFriend} disabled={formData.firstName==="" || formData.lastName==="" || formData.email===""}/> &nbsp;
+                <input type="button" value="Add SoloFriend" onClick={handleAddFriend} disabled={formData.firstName==="" || formData.lastName==="" || formData.email===""}/> &nbsp;
                 <input type="button" value="X" onClick={()=>setShowAddFriend(false)}/>
             </form>
         </div>
