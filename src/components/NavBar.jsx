@@ -17,7 +17,7 @@ const NavBar=()=>{
         }
     }
     return (
-        <header className={"d-flex justify-content-between sticky-top p-2 bg-dark bg-gradient text-light"}>
+        <header>
             <Link to="/profile" className={"text-white link-underline link-underline-opacity-0"}>Profile</Link><br/>
             <Link to="/friends" className={"text-white link-underline link-underline-opacity-0"}>Friends</Link><br/>
             <Link to="/groups" className={"text-white link-underline link-underline-opacity-0"}>Groups</Link><br/>

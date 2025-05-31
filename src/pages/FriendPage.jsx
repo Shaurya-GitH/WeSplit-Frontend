@@ -26,8 +26,8 @@ const FriendPage=()=>{
 
     return(
         <div>
-        <div className={"rounded bg-primary-subtle mx-5 my-0 p-2 my-2"}>
-            <div className={"d-flex flex-column align-items-start"}>
+        <div>
+            <div>
                 {friends.map((friend,i)=>
                     <div key={i} className={"mb-3"}>
                         <Friends friend={friend}/>

@@ -9,7 +9,6 @@ import NavBar from "./components/NavBar.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import UnprotectedRoute from "./components/UnprotectedRoute.jsx";
 import FriendPage from "./pages/FriendPage.jsx";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import SoloFriend from "./pages/SoloFriend.jsx";
 

@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 
 const HomeBar=()=>{
     return(
-        <header className={"d-flex justify-content-end sticky-top"}>
+        <header>
             <Link to="/login" className="mx-3">
                 Login
             </Link> <br/>
