@@ -1,7 +1,5 @@
-const SoloFriendPage=({balance,unsettled,email})=>{
+const Expenses=({unsettled})=>{
     return(
-        <div>
-            {email} <br/> {balance.oneOweTwo===0?`${balance.user2.firstName} owes ${balance.twoOweOne}`:balance.oneOweTwo}
             <div>
                 {unsettled.map((expense)=>
                     <div key={expense.expenseId}>
@@ -10,7 +8,6 @@ const SoloFriendPage=({balance,unsettled,email})=>{
                     </div>
                 )}
             </div>
-        </div>
     )
 }
-export default SoloFriendPage
+export default Expenses
