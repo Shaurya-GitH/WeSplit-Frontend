@@ -17,11 +17,11 @@ const NavBar=()=>{
         }
     }
     return (
-        <header>
-            <Link to="/profile" className={"text-white link-underline link-underline-opacity-0"}>Profile</Link><br/>
-            <Link to="/friends" className={"text-white link-underline link-underline-opacity-0"}>Friends</Link><br/>
-            <Link to="/groups" className={"text-white link-underline link-underline-opacity-0"}>Groups</Link><br/>
-            <button onClick={handleLogout} className={"bg-secondary rounded"}>Log Out</button>
+        <header className={"flex sticky justify-between bg-blue-300 p-3"}>
+            <Link to="/profile" className="mx-3 text-white font-bold text-2xl">Profile</Link><br/>
+            <Link to="/friends" className="mx-3 text-white font-bold text-2xl">Friends</Link><br/>
+            <Link to="/groups" className="mx-3 text-white font-bold text-2xl">Groups</Link><br/>
+            <button onClick={handleLogout} className={"text-white font-bold text-2xl"}>Log Out</button>
         </header>
     )
 }
