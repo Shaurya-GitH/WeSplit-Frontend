@@ -11,3 +11,13 @@ export const getUnsettledExpenses=async (email)=>{
     }
     return await axios.get(`${url}/unsettled/${email}`,config);
 }
+
+export const createSoloExpense=async (payload)=>{
+    const token=localStorage.getItem("token")
+    const config= {
+        headers:{
+            Authorization:token
+        }
+    }
+    return await axios.post(`${url}/create-solo/${payload.email}`,payload.formData,config);
+}

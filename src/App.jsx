@@ -9,9 +9,8 @@ import NavBar from "./components/NavBar.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import UnprotectedRoute from "./components/UnprotectedRoute.jsx";
 import FriendPage from "./pages/FriendPage.jsx";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import Friend from "./pages/Friend.jsx";
+import SoloFriend from "./pages/SoloFriend.jsx";
 
 const App=()=>{
     const user= useSelector(state => state.user);
@@ -27,7 +26,7 @@ const App=()=>{
                         <Route path="/register" element={<UnprotectedRoute><RegisterPage/></UnprotectedRoute>}/>
                         <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
                         <Route path="/friends" element={<ProtectedRoute><FriendPage/></ProtectedRoute>}/>
-                        <Route path="/friend/:email" element={<ProtectedRoute><Friend/></ProtectedRoute>}/>
+                        <Route path="/friend/:email" element={<ProtectedRoute><SoloFriend/></ProtectedRoute>}/>
                     </Routes>
                 </Router>
             </div>
