@@ -3,6 +3,7 @@ import App from './App.jsx'
 import { Provider } from "react-redux";
 import store from "./store.js";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import "./input.css"
 
 const queryClient= new QueryClient();
 createRoot(document.getElementById('root')).render(
