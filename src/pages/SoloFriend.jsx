@@ -52,34 +52,69 @@ const SoloFriend=()=>{
     ];
     const sortedList=mergedList.sort((a,b)=>b.id-a.id);
     return (
-        <div>
-            {email} <br/> {balance.oneOweTwo===0?`${balance.user2.firstName} owes ${balance.twoOweOne}`:`${balance.user1.firstName} owes ${balance.oneOweTwo}`}
-            <button onClick={()=>{
-                setShowCreatePayment(true);
-                setShowCreateExpense(false);
-            }}>Settle</button><br/>
-            <button onClick={()=>{
-                setShowCreateExpense(true);
-                setShowCreatePayment(false);
-            }}>Add Expense</button>
-            {
-                sortedList.map((entity)=>
-                    <div key={entity.id}>
-                        {entity.type==="expense"?
-                        <Expenses unsettled={entity.data}/>:
-                        <Payments payment={entity.data}/>}
+        <div className="max-w-2xl mx-auto p-4 space-y-6">
+            {/* Friend Info & Balance */}
+            <div className="bg-linear-to-b from-cyan-500 to-blue-500 rounded-lg border border-gray-200 p-4">
+                <div className="text-sm text-gray-600 mb-2">{email}</div>
+                <div className="text-lg font-medium text-gray-900">
+                    {balance.oneOweTwo === 0
+                        ? `${balance.user2.firstName} owes  ${balance.twoOweOne}`
+                        : `${balance.user1.firstName} owes  ${balance.oneOweTwo}`
+                    }
+                </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                    onClick={() => {
+                        setShowCreatePayment(true);
+                        setShowCreateExpense(false);
+                    }}
+                    className="flex-1 py-2 px-4 bg-green-600 text-white rounded-md font-medium hover:bg-green-700 transition-colors"
+                >
+                    Settle
+                </button>
+                <button
+                    onClick={() => {
+                        setShowCreateExpense(true);
+                        setShowCreatePayment(false);
+                    }}
+                    className="flex-1 py-2 px-4 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors"
+                >
+                    Add Expense
+                </button>
+            </div>
+
+            {/* Transactions List */}
+            <div className="space-y-3">
+                {sortedList.map((entity) => (
+                    <div key={entity.id} className="bg-white rounded-lg border border-gray-200 p-4">
+                        {entity.type === "expense" ?
+                            <Expenses unsettled={entity.data} /> :
+                            <Payments payment={entity.data} />
+                        }
                     </div>
-                )
-            }
-            <div>
+                ))}
+            </div>
+
+            {/* Modals */}
                 <Toggleable state={showCreateExpense}>
-                    <CreateSoloExpenseModal setShowCreateExpense={setShowCreateExpense}/>
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+                        <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+                            <CreateSoloExpenseModal setShowCreateExpense={setShowCreateExpense} />
+                        </div>
+                    </div>
                 </Toggleable>
                 <Toggleable state={showCreatePayment}>
-                    <CreatePaymentModal balance={balance} setShowCreatePayment={setShowCreatePayment}/>
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+                        <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+                            <CreatePaymentModal balance={balance} setShowCreatePayment={setShowCreatePayment} />
+                        </div>
+                    </div>
                 </Toggleable>
-            </div>
         </div>
+
     )
 }
 export default SoloFriend

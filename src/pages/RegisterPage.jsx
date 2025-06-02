@@ -173,17 +173,7 @@ const RegisterPage=()=>{
                                 formData.firstName === "" ||
                                 formData.lastName === ""
                             }
-                            className={`w-full py-3 px-4 rounded-lg font-semibold text-white transition-all duration-200 ${
-                                (!validatePassword.oneSpecial ||
-                                    !validatePassword.oneLetter ||
-                                    !validatePassword.oneDigit ||
-                                    !validatePassword.minimumEight ||
-                                    formData.email === "" ||
-                                    formData.firstName === "" ||
-                                    formData.lastName === "")
-                                    ? 'bg-gray-400 cursor-not-allowed'
-                                    : 'bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl'
-                            }`}
+                            className={"w-full py-3 px-4 rounded-lg font-semibold text-white transition-all duration-200 bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transform  hover:-translate-y-0.5 shadow-lg hover:shadow-xl disabled:bg-gray-400 disabled:cursor-not-allowed disabled:pointer-events-none"}
                         >
                             Create Account
                         </button>
