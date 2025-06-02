@@ -55,8 +55,8 @@ const SoloFriend=()=>{
         <div className="max-w-2xl mx-auto p-4 space-y-6">
             {/* Friend Info & Balance */}
             <div className="bg-linear-to-b from-cyan-500 to-blue-500 rounded-lg border border-gray-200 p-4">
-                <div className="text-sm text-gray-600 mb-2">{email}</div>
-                <div className="text-lg font-medium text-gray-900">
+                <div className="text-sm text-white mb-2">{email}</div>
+                <div className="text-lg font-medium text-white">
                     {balance.oneOweTwo === 0
                         ? `${balance.user2.firstName} owes  ${balance.twoOweOne}`
                         : `${balance.user1.firstName} owes  ${balance.oneOweTwo}`
