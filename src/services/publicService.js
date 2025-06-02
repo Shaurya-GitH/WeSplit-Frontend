@@ -10,11 +10,13 @@ const loginToServer=async (username,password)=>{
     try{
         const token = await axios.post(`${url}/login`,credentials);
         localStorage.setItem("token",`Bearer ${token.data}`);
-        return true;
+        return token;
     }
-    catch (e){
-        console.log(e.message);
-        return false;
+    catch (e) {
+        return {
+            status: e.response.status,
+            data: e.response.data,
+        };
     }
 }
 
