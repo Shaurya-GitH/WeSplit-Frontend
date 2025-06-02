@@ -7,7 +7,7 @@ import Toggleable from "../components/Toggleable.jsx";
 const RegisterPage=()=>{
     const navigate=useNavigate();
 
-    const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    const specialChar = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
 
     const [formData,setFormData]= useState({
         firstName:"",
@@ -163,8 +163,7 @@ const RegisterPage=()=>{
 
                         {/* Submit Button */}
                         <button
-                            onMouseDown={handleRegister}
-                            type="submit"
+                            onClick={handleRegister}
                             disabled={
                                 !validatePassword.oneSpecial ||
                                 !validatePassword.oneLetter ||

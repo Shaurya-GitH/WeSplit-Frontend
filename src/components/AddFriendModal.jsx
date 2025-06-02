@@ -9,6 +9,7 @@ const AddFriendModal=({setShowAddFriend})=>{
         onSuccess:()=>{
             queryClient.invalidateQueries({queryKey:['friends']})
             clearStates();
+            setShowAddFriend(false);
         },
         onError:(error)=>{
             console.log(error.response.data.exception)
