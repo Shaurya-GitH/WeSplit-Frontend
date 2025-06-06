@@ -40,22 +40,28 @@ const GroupPage=()=> {
                     </div>
                 </div>
             </div>
-            <div>
-                {groups.length>0?(
-                    <div>
-                        {groups.map((group)=>
-                            <div key={group.groupId}>
+            <div  className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="space-y-4">
+                    {groups.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        {groups.map((group) => (
+                            <div key={group.groupId} className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                                 <Link
                                     to={`/groups/${group.groupId}`}
                                     state={{group}}
+                                    className="block"
                                 >
-                                    <h1>{group.groupName}</h1>
+                                    <h1 className="text-lg font-bold text-blue-600 hover:text-blue-600 transition-colors">
+                                        {group.groupName}
+                                    </h1>
                                 </Link>
-                                <h5>{group.createdAt}</h5>
+                                <h5 className="text-sm text-gray-500 mt-1">
+                                    {group.createdAt}
+                                </h5>
                             </div>
-                        )}
+                        ))}
                     </div>
-                ):(
+                    ):(
                     /* Empty State */
                     <div className="text-center py-12">
                         <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
@@ -77,8 +83,8 @@ const GroupPage=()=> {
                             Add Your First Group
                         </button>
                     </div>
-                )}
-
+                    )}
+                </div>
             </div>
             {/* Add Group Modal */}
             <Toggleable state={showAddGroup}>
