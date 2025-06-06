@@ -33,4 +33,8 @@ const registerUser=async (payload)=>{
     }
 }
 
+export const healthCheck=async ()=>{
+    return axios.get(`${url}/health-check`);
+}
+
 export default {loginToServer,registerUser}

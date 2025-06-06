@@ -13,10 +13,18 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import SoloFriend from "./pages/SoloFriend.jsx";
 import GroupPage from "./pages/GroupPage.jsx";
 import SoloGroupPage from "./pages/SoloGroupPage.jsx";
+import ServerDownPage from "./pages/ServerDownPage.jsx";
 
 const App=()=>{
     const user= useSelector(state => state.user);
+    const health= useSelector(state=>state.health);
     const queryClient=new QueryClient();
+
+    if(health===false){
+        return(
+            <ServerDownPage/>
+        )
+    }
     return(
         <QueryClientProvider client={queryClient}>
             <div>
