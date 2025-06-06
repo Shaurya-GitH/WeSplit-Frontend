@@ -1,8 +1,8 @@
-import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
+import useRoute from "../hooks/useRoute.js";
 
 const ProtectedRoute=(props)=>{
-    const user=useSelector(state => state.user);
+    const user =useRoute();
     return(
         <>
             {user?props.children:<Navigate to="/login" replace/> }
