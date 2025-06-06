@@ -4,6 +4,7 @@ import Friends from "../components/Friends.jsx";
 import AddFriendModal from "../modals/AddFriendModal.jsx";
 import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
+import Loading from "../components/Loading.jsx";
 
 const FriendPage=()=>{
 
@@ -16,15 +17,13 @@ const FriendPage=()=>{
 
     if(result.isLoading){
         return (
-            <>
-                <h1>Fetching friends...</h1>
-            </>
+            <Loading/>
         )
     }
 
-    const friends= result.data.data;
+    const friends = result.data.data;
 
-    return(
+    return (
         <div className="min-h-screen">
             {/* Header */}
             <div className="bg-linear-to-r from-cyan-500 to-blue-500 shadow-sm border-b border-gray-200">

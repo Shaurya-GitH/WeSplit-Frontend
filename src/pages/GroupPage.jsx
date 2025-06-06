@@ -5,6 +5,7 @@ import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
 import AddFriendModal from "../modals/AddFriendModal.jsx";
 import AddGroupModal from "../modals/AddGroupModal.jsx";
+import Loading from "../components/Loading.jsx";
 
 const GroupPage=()=> {
     const [showAddGroup,setShowAddGroup]=useState(false);
@@ -14,7 +15,7 @@ const GroupPage=()=> {
     });
     if(result.isLoading){
         return (
-            <div>Fetching data...</div>
+            <Loading/>
         )
     }
     const groups=result.data.data;

@@ -8,6 +8,7 @@ import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
 import CreateSoloExpenseModal from "../modals/CreateSoloExpenseModal.jsx";
 import CreateGroupPaymentModal from "../modals/CreateGroupPaymentModal.jsx";
+import Loading from "../components/Loading.jsx";
 
 const SoloGroupPage=()=>{
     const {group}=useLocation().state;
@@ -30,9 +31,7 @@ const SoloGroupPage=()=>{
 
     if(balanceResult.isLoading || unsettledResult.isLoading || paymentResult.isLoading){
         return (
-            <div>
-                <h1>Fetching data...</h1>
-            </div>
+            <Loading/>
         )
     }
 

@@ -10,6 +10,7 @@ import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
 import CreateSoloExpenseModal from "../modals/CreateSoloExpenseModal.jsx";
 import TransactionList from "../components/TransactionList.jsx";
+import Loading from "../components/Loading.jsx";
 
 const SoloFriend=()=>{
     const email=useParams().email;
@@ -30,9 +31,7 @@ const SoloFriend=()=>{
 
     if(balanceResult.isLoading || expenseResult.isLoading || paymentResult.isLoading){
         return (
-            <div>
-                <h1>Loading data...</h1>
-            </div>
+           <Loading/>
         )
     }
     const balance=balanceResult.data.data;
