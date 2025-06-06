@@ -22,7 +22,7 @@ const FriendPage=()=>{
         )
     }
 
-    const friends= result.data;
+    const friends= result.data.data;
 
     return(
         <div className="min-h-screen">
