@@ -9,6 +9,7 @@ import CreatePaymentModal from "../components/CreatePaymentModal.jsx";
 import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
 import CreateSoloExpenseModal from "../components/CreateSoloExpenseModal.jsx";
+import TransactionList from "../components/TransactionList.jsx";
 
 const SoloFriend=()=>{
     const email=useParams().email;
@@ -87,16 +88,7 @@ const SoloFriend=()=>{
             </div>
 
             {/* Transactions List */}
-            <div className="space-y-3">
-                {sortedList.map((entity) => (
-                    <div key={entity.id} className="bg-white rounded-lg border border-gray-200 p-4">
-                        {entity.type === "expense" ?
-                            <Expenses unsettled={entity.data} /> :
-                            <Payments payment={entity.data} />
-                        }
-                    </div>
-                ))}
-            </div>
+            <TransactionList sortedList={sortedList}/>
 
             {/* Modals */}
                 <Toggleable state={showCreateExpense}>

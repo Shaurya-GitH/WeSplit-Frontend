@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {createPayment} from "../services/paymentService.js";
 
-const CreatePaymentModal=({balance,setShowCreatePayment})=>{
+const CreatePaymentModal=({balance,setShowCreatePayment,groupId})=>{
     const [formData,setFormData]=useState({
         amountPaid:balance.oneOweTwo===0?balance.twoOweOne:balance.oneOweTwo,
         currency:"",
@@ -44,8 +44,16 @@ const CreatePaymentModal=({balance,setShowCreatePayment})=>{
     }
     const handleSubmit=(e)=>{
         e.preventDefault();
-        mutation.mutate(formData);
-        console.log("submitted");
+        if(groupId){
+            const groupFormData={
+                ...formData,
+                groupId:groupId,
+            };
+            mutation.mutate(groupFormData);
+        }
+        else{
+            mutation.mutate(formData);
+        }
     }
     return (
         <div className="p-6 w-full max-w-md mx-auto">
