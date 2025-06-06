@@ -17,11 +17,11 @@ const NavBar=()=>{
         }
     }
     return (
-        <header className={"flex sticky justify-between bg-blue-300 p-3"}>
-            <Link to="/profile" className="mx-3 text-white font-bold text-2xl">Profile</Link><br/>
-            <Link to="/friends" className="mx-3 text-white font-bold text-2xl">Friends</Link><br/>
-            <Link to="/groups" className="mx-3 text-white font-bold text-2xl">Groups</Link><br/>
-            <button onClick={handleLogout} className={"text-white font-bold text-2xl"}>Log Out</button>
+        <header className={"flex sticky top-0 justify-between bg-gradient-to-r from-blue-50 to-indigo-50 p-3"}>
+            <Link to="/profile" className="text-black font-bold text-2xl ">Profile</Link><br/>
+            <Link to="/friends" className="text-black font-bold text-2xl ">Friends</Link><br/>
+            <Link to="/groups" className="text-black font-bold text-2xl ">Groups</Link><br/>
+            <button onClick={handleLogout} className={"text-blue-600 font-bold text-2xl hover:cursor-pointer "}>Log Out</button>
         </header>
     )
 }

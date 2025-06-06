@@ -3,7 +3,7 @@ const Payments=({payment})=>{
         <div>
 
                    <div>
-                       {payment.paidBy.firstName} paid {payment.paidTo.firstName} {payment.amountPaid}
+                       {payment.paidBy.firstName} paid {payment.paidTo.firstName} {payment.currency} {payment.amountPaid}
                    </div>
 
         </div>

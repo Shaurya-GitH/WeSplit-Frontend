@@ -48,17 +48,69 @@ const CreatePaymentModal=({balance,setShowCreatePayment})=>{
         console.log("submitted");
     }
     return (
-        <div>
-            {formData.email1} paid {formData.email2}
-            <button onClick={handleSwitch}>switch</button>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="currency" placeholder="INR" value={formData.currency}
-                       onInput={(e) => handleInput(e.target)}/>
-                <input type="number" name="amountPaid" value={formData.amountPaid}
-                       onInput={(e) => handleInput(e.target)}/>
-                <input type="submit" value="Pay" disabled={formData.currency==="" || formData.amountPaid<=0 || formData.email1===formData.email2 || formData.email1===""}/>
+        <div className="p-6 w-full max-w-md mx-auto">
+            {/* Header with Close Button */}
+            <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-gray-900">Create Payment</h2>
+                <button
+                    onClick={() => setShowCreatePayment(false)}
+                    className="text-gray-400 hover:text-gray-600 p-1"
+                >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+
+            {/* Payment Direction */}
+            <div className="flex items-center justify-between mb-6 p-3 bg-gray-50 rounded-lg">
+        <span className="text-sm text-gray-700">
+            <span className="font-medium">{formData.email1}</span> paid <span className="font-medium">{formData.email2}</span>
+        </span>
+                <button
+                    onClick={handleSwitch}
+                    className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                >
+                    Switch
+                </button>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Currency</label>
+                    <input
+                        type="text"
+                        name="currency"
+                        placeholder="INR"
+                        value={formData.currency}
+                        onInput={(e) => handleInput(e.target)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+                    <input
+                        type="number"
+                        name="amountPaid"
+                        value={formData.amountPaid}
+                        onInput={(e) => handleInput(e.target)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="0.00"
+                    />
+                </div>
+
+                <button
+                    type="submit"
+                    disabled={formData.currency === "" || formData.amountPaid <= 0 || formData.email1 === formData.email2 || formData.email1 === ""}
+                    className="w-full py-2 px-4 bg-green-600 text-white rounded-md font-medium hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                >
+                    Pay
+                </button>
             </form>
         </div>
+
     )
 }
 export default CreatePaymentModal
