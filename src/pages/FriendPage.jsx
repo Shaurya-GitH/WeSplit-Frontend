@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import userService from "../services/userService.js";
 import Friends from "../components/Friends.jsx";
-import AddFriendModal from "../components/AddFriendModal.jsx";
+import AddFriendModal from "../modals/AddFriendModal.jsx";
 import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
 

@@ -6,8 +6,8 @@ import {getGroupPayments} from "../services/paymentService.js";
 import TransactionList from "../components/TransactionList.jsx";
 import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
-import CreateSoloExpenseModal from "../components/CreateSoloExpenseModal.jsx";
-import CreateGroupPaymentModal from "../components/CreateGroupPaymentModal.jsx";
+import CreateSoloExpenseModal from "../modals/CreateSoloExpenseModal.jsx";
+import CreateGroupPaymentModal from "../modals/CreateGroupPaymentModal.jsx";
 
 const SoloGroupPage=()=>{
     const {group}=useLocation().state;

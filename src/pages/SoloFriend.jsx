@@ -5,10 +5,10 @@ import {getBalance} from "../services/balanceService.js";
 import Expenses from "../components/Expenses.jsx";
 import {getPayments} from "../services/paymentService.js";
 import Payments from "../components/Payments.jsx";
-import CreatePaymentModal from "../components/CreatePaymentModal.jsx";
+import CreatePaymentModal from "../modals/CreatePaymentModal.jsx";
 import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
-import CreateSoloExpenseModal from "../components/CreateSoloExpenseModal.jsx";
+import CreateSoloExpenseModal from "../modals/CreateSoloExpenseModal.jsx";
 import TransactionList from "../components/TransactionList.jsx";
 
 const SoloFriend=()=>{

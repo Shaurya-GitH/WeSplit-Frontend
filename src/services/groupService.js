@@ -11,3 +11,13 @@ export const getGroups=async ()=>{
     }
     return axios.get(`${url}/`,config);
 }
+
+export const createGroup=async (name)=>{
+    const token=localStorage.getItem("token")
+    const config= {
+        headers:{
+            Authorization:token
+        }
+    }
+    return axios.post(`${url}/create/${name}`,null,config);
+}
