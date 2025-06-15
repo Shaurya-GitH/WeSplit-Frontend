@@ -11,10 +11,20 @@ import UnprotectedRoute from "./components/UnprotectedRoute.jsx";
 import FriendPage from "./pages/FriendPage.jsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import SoloFriend from "./pages/SoloFriend.jsx";
+import GroupPage from "./pages/GroupPage.jsx";
+import SoloGroupPage from "./pages/SoloGroupPage.jsx";
+import ServerDownPage from "./pages/ServerDownPage.jsx";
 
 const App=()=>{
     const user= useSelector(state => state.user);
+    const health= useSelector(state=>state.health);
     const queryClient=new QueryClient();
+
+    if(health===false){
+        return(
+            <ServerDownPage/>
+        )
+    }
     return(
         <QueryClientProvider client={queryClient}>
             <div>
@@ -27,6 +37,8 @@ const App=()=>{
                         <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
                         <Route path="/friends" element={<ProtectedRoute><FriendPage/></ProtectedRoute>}/>
                         <Route path="/friend/:email" element={<ProtectedRoute><SoloFriend/></ProtectedRoute>}/>
+                        <Route path="/groups" element={<ProtectedRoute><GroupPage/></ProtectedRoute>}/>
+                        <Route path="/groups/:id" element={<ProtectedRoute><SoloGroupPage/></ProtectedRoute>}/>
                     </Routes>
                 </Router>
             </div>

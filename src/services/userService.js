@@ -9,8 +9,7 @@ const getFriends=async ()=>{
                 Authorization:token
             }
         }
-        const friends= await axios.get(`${url}/friend-list`,config);
-        return friends.data;
+       return await axios.get(`${url}/friend-list`,config);
 }
 
 const addFriend=async (payload)=>{

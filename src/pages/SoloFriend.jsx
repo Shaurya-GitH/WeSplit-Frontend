@@ -5,10 +5,12 @@ import {getBalance} from "../services/balanceService.js";
 import Expenses from "../components/Expenses.jsx";
 import {getPayments} from "../services/paymentService.js";
 import Payments from "../components/Payments.jsx";
-import CreatePaymentModal from "../components/CreatePaymentModal.jsx";
+import CreatePaymentModal from "../modals/CreatePaymentModal.jsx";
 import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
-import CreateSoloExpenseModal from "../components/CreateSoloExpenseModal.jsx";
+import CreateSoloExpenseModal from "../modals/CreateSoloExpenseModal.jsx";
+import TransactionList from "../components/TransactionList.jsx";
+import Loading from "../components/Loading.jsx";
 
 const SoloFriend=()=>{
     const email=useParams().email;
@@ -29,9 +31,7 @@ const SoloFriend=()=>{
 
     if(balanceResult.isLoading || expenseResult.isLoading || paymentResult.isLoading){
         return (
-            <div>
-                <h1>Loading data...</h1>
-            </div>
+           <Loading/>
         )
     }
     const balance=balanceResult.data.data;
@@ -55,8 +55,8 @@ const SoloFriend=()=>{
         <div className="max-w-2xl mx-auto p-4 space-y-6">
             {/* Friend Info & Balance */}
             <div className="bg-linear-to-b from-cyan-500 to-blue-500 rounded-lg border border-gray-200 p-4">
-                <div className="text-sm text-gray-600 mb-2">{email}</div>
-                <div className="text-lg font-medium text-gray-900">
+                <div className="text-sm text-white mb-2">{email}</div>
+                <div className="text-lg font-medium text-white">
                     {balance.oneOweTwo === 0
                         ? `${balance.user2.firstName} owes  ${balance.twoOweOne}`
                         : `${balance.user1.firstName} owes  ${balance.oneOweTwo}`
@@ -87,16 +87,7 @@ const SoloFriend=()=>{
             </div>
 
             {/* Transactions List */}
-            <div className="space-y-3">
-                {sortedList.map((entity) => (
-                    <div key={entity.id} className="bg-white rounded-lg border border-gray-200 p-4">
-                        {entity.type === "expense" ?
-                            <Expenses unsettled={entity.data} /> :
-                            <Payments payment={entity.data} />
-                        }
-                    </div>
-                ))}
-            </div>
+            <TransactionList sortedList={sortedList}/>
 
             {/* Modals */}
                 <Toggleable state={showCreateExpense}>

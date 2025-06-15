@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {createPayment} from "../services/paymentService.js";
+import {createGroupPayment, createPayment} from "../services/paymentService.js";
 
-const CreatePaymentModal=({balance,setShowCreatePayment})=>{
+const CreatePaymentModal=({balance,setShowCreatePayment,groupId})=>{
     const [formData,setFormData]=useState({
         amountPaid:balance.oneOweTwo===0?balance.twoOweOne:balance.oneOweTwo,
         currency:"",
@@ -21,6 +21,20 @@ const CreatePaymentModal=({balance,setShowCreatePayment})=>{
                .then(()=>{
                    setShowCreatePayment(false);
                })
+        },
+    })
+
+    const groupMutation=useMutation({
+        mutationFn:createGroupPayment,
+        onSuccess:()=>{
+            Promise.all([
+                queryClient.invalidateQueries({queryKey:['groupUnsettled']}),
+                queryClient.invalidateQueries({queryKey:['groupPayment']}),
+                queryClient.invalidateQueries({queryKey:['groupBalance']}),
+            ])
+                .then(()=>{
+                    setShowCreatePayment(false);
+                })
         },
     })
 
@@ -44,8 +58,16 @@ const CreatePaymentModal=({balance,setShowCreatePayment})=>{
     }
     const handleSubmit=(e)=>{
         e.preventDefault();
-        mutation.mutate(formData);
-        console.log("submitted");
+        if(groupId){
+            const groupFormData={
+                ...formData,
+                groupId:groupId,
+            };
+            groupMutation.mutate(groupFormData);
+        }
+        else{
+            mutation.mutate(formData);
+        }
     }
     return (
         <div className="p-6 w-full max-w-md mx-auto">
@@ -98,6 +120,7 @@ const CreatePaymentModal=({balance,setShowCreatePayment})=>{
                         onInput={(e) => handleInput(e.target)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="0.00"
+                        min="1"
                     />
                 </div>
 

@@ -12,6 +12,16 @@ export const getPayments=async (email)=>{
     return await axios.get(`${url}/${email}`,config);
 }
 
+export const getGroupPayments=async (id)=>{
+    const token=localStorage.getItem("token")
+    const config= {
+        headers:{
+            Authorization:token
+        }
+    }
+    return await axios.get(`${url}/group/${id}`,config);
+}
+
 export const createPayment=async (payload)=>{
     const token=localStorage.getItem("token")
     const config= {
@@ -20,4 +30,14 @@ export const createPayment=async (payload)=>{
         }
     }
     return await axios.post(`${url}/create`,payload,config);
+}
+
+export const createGroupPayment=async (payload)=>{
+    const token=localStorage.getItem("token")
+    const config= {
+        headers:{
+            Authorization:token
+        }
+    }
+    return await axios.post(`${url}/createGroup`,payload,config);
 }

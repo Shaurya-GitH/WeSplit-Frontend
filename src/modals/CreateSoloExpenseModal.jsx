@@ -117,8 +117,8 @@ const CreateSoloExpenseModal=({setShowCreateExpense})=>{
                     >
                         <option value="SPLIT_EQUALLY_PAIDBY_USER1">Split equally and paid by {email1}</option>
                         <option value="SPLIT_EQUALLY_PAIDBY_USER2">Split equally and paid by {email2}</option>
-                        <option value="OWED_USER1">{email1} owes all</option>
-                        <option value="OWED_USER2">{email2} owes all</option>
+                        <option value="OWED_USER1">{email2} owes all</option>
+                        <option value="OWED_USER2">{email1} owes all</option>
                     </select>
                 </div>
 

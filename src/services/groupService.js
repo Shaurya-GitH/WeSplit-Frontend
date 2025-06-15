@@ -1,23 +1,23 @@
 import axios from "axios";
 
-const url="http://localhost:8080/api/balance"
+const url="http://localhost:8080/api/groups";
 
-export const getBalance=async (email)=>{
+export const getGroups=async ()=>{
     const token=localStorage.getItem("token")
     const config= {
         headers:{
             Authorization:token
         }
     }
-    return await axios.get(`${url}/solo/${email}`,config)
+    return axios.get(`${url}/`,config);
 }
 
-export const getGroupBalance=async (id)=>{
+export const createGroup=async (name)=>{
     const token=localStorage.getItem("token")
     const config= {
         headers:{
             Authorization:token
         }
     }
-    return axios.get(`${url}/group/${id}`,config);
+    return axios.post(`${url}/create/${name}`,null,config);
 }
