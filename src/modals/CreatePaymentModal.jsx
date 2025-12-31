@@ -115,6 +115,7 @@ const CreatePaymentModal=({balance,setShowCreatePayment,groupId})=>{
                     <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
                     <input
                         type="number"
+                        step="any"
                         name="amountPaid"
                         value={formData.amountPaid}
                         onInput={(e) => handleInput(e.target)}

@@ -38,19 +38,31 @@ const SoloFriend=()=>{
     const unsettled=expenseResult.data.data;
     const payment=paymentResult.data.data;
 
-    const mergedList=[
-            ...unsettled.map((expense)=>({
-            id:expense.expenseId,
-            type:"expense",
-            data:expense,
-    })),
-        ...payment.map((pay)=>({
-            id:pay.paymentId,
-            type:"payment",
-            data:pay,
+    const mergedList = [
+        ...unsettled.map(expense => ({
+            id: expense.expenseId,
+            type: "expense",
+            data: expense,
+        })),
+        ...payment.map(pay => ({
+            id: pay.paymentId,
+            type: "payment",
+            data: pay,
         }))
     ];
-    const sortedList=mergedList.sort((a,b)=>b.id-a.id);
+    let sortedList;
+    if (unsettled.length === 0) {
+        sortedList = [];
+    } else {
+        const firstUnsettledId = unsettled[0].expenseId;
+        sortedList = mergedList
+            .filter(item =>
+                item.type !== "payment" ||
+                item.id >= payment.findLast(p => p.paymentId < firstUnsettledId)?.paymentId
+            )
+            .sort((a, b) => b.id - a.id);
+    }
+
     return (
         <div className="max-w-2xl mx-auto p-4 space-y-6">
             {/* Friend Info & Balance */}
