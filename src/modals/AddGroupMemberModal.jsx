@@ -32,15 +32,12 @@ const AddGroupMemberModal = ({ setShowAddMember, groupMembers, groupId, setGroup
         return <Loading />;
     }
 
-    // Safe access in case data is undefined
     const friends = result.data?.data || [];
 
-    // Filter out friends who are already in the group (comparing emails)
     const availableFriends = friends.filter(friend =>
         !groupMembers.some(member => member.email === friend.email)
     );
 
-    // UPDATED: Handler now accepts an email string
     const handleToggleFriend = (email) => {
         setSelectedEmails(prev => {
             if (prev.includes(email)) {
@@ -60,54 +57,74 @@ const AddGroupMemberModal = ({ setShowAddMember, groupMembers, groupId, setGroup
         });
     };
 
+
     return (
-        <div className="modal-container">
-            <h3>Add Members</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="w-full max-w-md rounded-2xl bg-white shadow-2xl">
+                {/* Header */}
+                <div className="border-b px-6 py-4">
+                    <h3 className="text-lg font-semibold text-gray-800">
+                        Add Members
+                    </h3>
+                </div>
 
-            <div className="friends-list" style={{ maxHeight: '300px', overflowY: 'auto' }}>
-                {availableFriends.length === 0 ? (
-                    <p>No new friends to add.</p>
-                ) : (
-                    availableFriends.map((friend) => (
-                        <div
-                            // UPDATED: Use email as key
-                            key={friend.email}
-                            style={{ display: 'flex', alignItems: 'center', padding: '10px', borderBottom: '1px solid #eee' }}
-                        >
-                            <input
-                                type="checkbox"
-                                // UPDATED: ID based on email to match label
-                                id={`friend-${friend.email}`}
-                                // UPDATED: Check if email is in state
-                                checked={selectedEmails.includes(friend.email)}
-                                // UPDATED: Pass email to handler
-                                onChange={() => handleToggleFriend(friend.email)}
-                                style={{ marginRight: '10px' }}
-                            />
-                            {/* UPDATED: Label htmlFor matches input ID */}
-                            <label htmlFor={`friend-${friend.email}`} style={{ cursor: 'pointer', flex: 1 }}>
-                                <span style={{ marginRight: '8px', fontWeight: 'bold' }}>
-                                    {friend.firstName}
-                                </span>
-                                <span style={{ color: '#666', fontSize: '0.9em' }}>
-                                    {friend.email}
-                                </span>
-                            </label>
+                {/* Body */}
+                <div className="max-h-[300px] overflow-y-auto px-6 py-4">
+                    {availableFriends.length === 0 ? (
+                        <p className="text-sm text-gray-500 text-center">
+                            No new friends to add.
+                        </p>
+                    ) : (
+                        <div className="space-y-2">
+                            {availableFriends.map((friend) => (
+                                <label
+                                    key={friend.email}
+                                    htmlFor={`friend-${friend.email}`}
+                                    className="flex cursor-pointer items-center gap-3 rounded-lg border p-3 hover:bg-gray-50 transition"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        id={`friend-${friend.email}`}
+                                        checked={selectedEmails.includes(friend.email)}
+                                        onChange={() => handleToggleFriend(friend.email)}
+                                        className="h-4 w-4 accent-indigo-600"
+                                    />
+
+                                    <div className="flex flex-col">
+                  <span className="font-medium text-gray-800">
+                    {friend.firstName}
+                  </span>
+                                        <span className="text-sm text-gray-500">
+                    {friend.email}
+                  </span>
+                                    </div>
+                                </label>
+                            ))}
                         </div>
-                    ))
-                )}
-            </div>
+                    )}
+                </div>
 
-            <div className="actions" style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
-                <button onClick={handleAddMembers} disabled={selectedEmails.length === 0}>
-                    Add Selected
-                </button>
-                <button onClick={() => setShowAddMember(false)}>
-                    Cancel
-                </button>
+                {/* Footer */}
+                <div className="flex justify-end gap-3 border-t px-6 py-4">
+                    <button
+                        onClick={() => setShowAddMember(false)}
+                        className="rounded-lg border px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 transition"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        onClick={handleAddMembers}
+                        disabled={selectedEmails.length === 0}
+                        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50 transition"
+                    >
+                        Add Selected
+                    </button>
+                </div>
             </div>
         </div>
     );
+
 };
 
 export default AddGroupMemberModal;

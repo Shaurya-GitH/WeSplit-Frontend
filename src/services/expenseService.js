@@ -31,3 +31,14 @@ export const getGroupUnsettledExpenses=async (id)=>{
     }
     return await axios.get(`${url}/group-unsettled/${id}`,config);
 }
+
+
+export const createGroupExpense= async (payload)=>{
+    const token=localStorage.getItem("token")
+    const config={
+        headers:{
+            Authorization:token
+        }
+    }
+    return axios.post(`${url}/create-group`,payload,config)
+}

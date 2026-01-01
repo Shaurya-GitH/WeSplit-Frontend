@@ -6,10 +6,10 @@ import {getGroupPayments} from "../services/paymentService.js";
 import TransactionList from "../components/TransactionList.jsx";
 import {useState} from "react";
 import Toggleable from "../components/Toggleable.jsx";
-import CreateSoloExpenseModal from "../modals/CreateSoloExpenseModal.jsx";
 import CreateGroupPaymentModal from "../modals/CreateGroupPaymentModal.jsx";
 import Loading from "../components/Loading.jsx";
 import AddGroupMemberModal from "../modals/AddGroupMemberModal.jsx";
+import CreateGroupExpenseModal from "../modals/CreateGroupExpenseModal.jsx";
 
 const SoloGroupPage=()=>{
     const {group}=useLocation().state;
@@ -76,15 +76,32 @@ const SoloGroupPage=()=>{
                     {/* Sidebar - Group Members */}
                     <aside className="lg:col-span-1">
                         <div className="bg-white rounded-lg shadow-sm p-6">
-                            <h2 className="text-lg font-semibold mb-4 text-gray-800">Group Members</h2>
-                            <button onClick={()=>setShowAddMember(true)}>+</button>
+                            {/* Header Row with Flexbox */}
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="text-lg font-semibold text-gray-800">Group Members</h2>
+
+                                {/* Circular Icon Button */}
+                                <button
+                                    onClick={() => setShowAddMember(true)}
+                                    className="p-2 rounded-full text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors duration-200 flex items-center justify-center"
+                                    title="Add Member"
+                                >
+                                    {/* Plus Icon SVG */}
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                                        <path fillRule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+
                             <div className="space-y-3">
                                 {groupMembers.map((member) => (
-                                    <div key={member.email} className="p-3 bg-gray-50 rounded-lg">
-                                        <h3 className="font-medium text-gray-900">
-                                            {member.firstName} {member.lastName}
-                                        </h3>
-                                        <p className="text-sm text-gray-600">{member.email}</p>
+                                    <div key={member.email} className="p-3 bg-gray-50 rounded-lg flex items-center justify-between group hover:bg-gray-100 transition-colors">
+                                        <div>
+                                            <h3 className="font-medium text-gray-900">
+                                                {member.firstName} {member.lastName}
+                                            </h3>
+                                            <p className="text-sm text-gray-600">{member.email}</p>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -157,7 +174,7 @@ const SoloGroupPage=()=>{
             <Toggleable state={showCreateExpense}>
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
                     <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-                        <CreateSoloExpenseModal setShowCreateExpense={setShowCreateExpense} />
+                        <CreateGroupExpenseModal setShowCreateExpense={setShowCreateExpense} groupMembers={groupMembers} groupId={id}/>
                     </div>
                 </div>
             </Toggleable>
