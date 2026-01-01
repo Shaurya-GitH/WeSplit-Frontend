@@ -21,3 +21,13 @@ export const createGroup=async (name)=>{
     }
     return axios.post(`${url}/create/${name}`,null,config);
 }
+
+export const addGroupMember=async ({groupId,selectedMemberList})=>{
+    const token=localStorage.getItem("token")
+    const config={
+       headers:{
+           Authorization:token
+       }
+    }
+    return axios.post(`${url}/add/${groupId}`,selectedMemberList,config)
+}

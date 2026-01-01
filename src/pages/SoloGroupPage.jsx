@@ -9,12 +9,15 @@ import Toggleable from "../components/Toggleable.jsx";
 import CreateSoloExpenseModal from "../modals/CreateSoloExpenseModal.jsx";
 import CreateGroupPaymentModal from "../modals/CreateGroupPaymentModal.jsx";
 import Loading from "../components/Loading.jsx";
+import AddGroupMemberModal from "../modals/AddGroupMemberModal.jsx";
 
 const SoloGroupPage=()=>{
     const {group}=useLocation().state;
     const id=useParams().id;
     const [showCreatePayment,setShowCreatePayment]=useState(false);
     const [showCreateExpense,setShowCreateExpense]=useState(false);
+    const [showAddMember,setShowAddMember]=useState(false);
+    const [groupMembers,setGroupMembers]=useState(group.members);
 
     const balanceResult=useQuery({
         queryKey:['groupBalance'],
@@ -74,8 +77,9 @@ const SoloGroupPage=()=>{
                     <aside className="lg:col-span-1">
                         <div className="bg-white rounded-lg shadow-sm p-6">
                             <h2 className="text-lg font-semibold mb-4 text-gray-800">Group Members</h2>
+                            <button onClick={()=>setShowAddMember(true)}>+</button>
                             <div className="space-y-3">
-                                {group.members.map((member) => (
+                                {groupMembers.map((member) => (
                                     <div key={member.email} className="p-3 bg-gray-50 rounded-lg">
                                         <h3 className="font-medium text-gray-900">
                                             {member.firstName} {member.lastName}
@@ -164,6 +168,10 @@ const SoloGroupPage=()=>{
                         <CreateGroupPaymentModal balances={balances} setShowCreatePayment={setShowCreatePayment} />
                     </div>
                 </div>
+            </Toggleable>
+
+            <Toggleable state={showAddMember}>
+                <AddGroupMemberModal setShowAddMember={setShowAddMember} groupMembers={groupMembers} groupId={id} setGroupMembers={setGroupMembers}/>
             </Toggleable>
         </div>
 
