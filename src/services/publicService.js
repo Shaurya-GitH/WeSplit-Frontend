@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url="http://localhost:8080/api/public"
+const backendDN=import.meta.env.VITE_BACKEND_DN;
+const url=`http://${backendDN}:8080/api/public`
 
 const loginToServer=async (username,password)=>{
     const credentials={

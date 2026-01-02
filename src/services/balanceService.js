@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url="http://localhost:8080/api/balance"
+const backendDN=import.meta.env.VITE_BACKEND_DN;
+const url=`http://${backendDN}:8080/api/balance`
 
 export const getBalance=async (email)=>{
     const token=localStorage.getItem("token")
