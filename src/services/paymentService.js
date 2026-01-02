@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const backendDN=import.meta.env.VITE_BACKEND_DN;
-const url=`http://${backendDN}:8080/api/payment`;
+const url=`http://${backendDN}/api/payment`;
 
 export const getPayments=async (email)=>{
     const token=localStorage.getItem("token")
